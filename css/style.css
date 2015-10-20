@@ -1,0 +1,41 @@
+html {
+	height: 100%;
+	background-image: linear-gradient(#4caf50, #c8e6c9);
+	background: -o-linear-gradient(#4caf50, #c8e6c9); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#4caf50, #c8e6c9); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(#4caf50, #c8e6c9); /* Standard syntax */
+}
+
+p {
+	color: white;
+	text-align: center;
+}
+
+h1 {
+	font-size: 100px;
+	color: white;
+	text-align: center;
+}
+
+footer {
+	position: fixed;
+	text-align: right;
+	width: 25%;
+	bottom: 0px;
+	font-size: 12px;
+}
+
+.counter {
+	margin-top: 10px;
+	margin-right: 15px;
+	font-size: 15px;
+}
+
+.modal-content, .modal-footer {
+	background: #212121;
+	background-image: linear-gradient(#212121, #424242);
+	background: -o-linear-gradient(#212121, #424242); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#212121, #424242); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(#212121, #424242); /* Standard syntax */
+	color: #e0e0e0;
+}
