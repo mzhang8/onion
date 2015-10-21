@@ -1,6 +1,6 @@
 html {
 	height: 100%;
-	background-image: linear-gradient(#4caf50, #c8e6c9);
+	background: -webkit-linear-gradient(#4caf50, #c8e6c9);
 	background: -o-linear-gradient(#4caf50, #c8e6c9); /* For Opera 11.1 to 12.0 */
 	background: -moz-linear-gradient(#4caf50, #c8e6c9); /* For Firefox 3.6 to 15 */
 	background: linear-gradient(#4caf50, #c8e6c9); /* Standard syntax */
@@ -15,6 +15,12 @@ h1 {
 	font-size: 100px;
 	color: white;
 	text-align: center;
+}
+
+h2 {
+	margin-top: 150px;
+	color: white;
+	font-size: 60px !important;
 }
 
 footer {
@@ -38,4 +44,32 @@ footer {
 	background: -moz-linear-gradient(#212121, #424242); /* For Firefox 3.6 to 15 */
 	background: linear-gradient(#212121, #424242); /* Standard syntax */
 	color: #e0e0e0;
+}
+
+.input-field label {
+	color: #bdbdbd; 
+	font-size: 17px;
+}
+
+.input-field input[type=number]:focus + label {
+	color: white;
+}
+
+.input-field input[type=number]:focus {
+  border-bottom: 1px solid white;
+  box-shadow: 0 1px 0 0 white;
+}
+
+.input-field input[type=number].valid {
+     border-bottom: 1px solid white;
+     box-shadow: 0 1px 0 0 white;
+}
+   
+.input-field input[type=number].invalid {
+	border-bottom: 1px solid #e53935;
+	box-shadow: 0 1px 0 0 #e539350;
+}
+
+.input-field .prefix.active {
+	color: white;
 }
