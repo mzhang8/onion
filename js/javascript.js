@@ -29,12 +29,9 @@ $(document).ready(function(){
             numParticipants = $('#num_participants').val();
             numLayers = $('#num_layers').val();
 
-            console.log(numParticipants);
-            console.log(numParticipants % 1);
-
             if (numParticipants > 2 && numLayers >= 1 && numLayers <= 10) {
                 if ((numParticipants % 1 == 0) && (numLayers % 1 == 0)) {
-                    $('#cont-btn').show("slow");
+                    $('#cont-btn').delay(200).fadeIn(1000);
                 } else {
                     $('#cont-btn').fadeOut(100);
                 }
@@ -198,10 +195,10 @@ $(document).ready(function(){
     }
 
     function setColors(color1, color2) {
-        var str1 = '-webkit-linear-gradient(' + color1 + ', ' + color2 + ')';
-        var str2 = '-o-linear-gradient(' + color1 + ', ' + color2 + ')';
-        var str3 = '-moz-linear-gradient(' + color1 + ', ' + color2 + ')';
-        var str4 = 'linear-gradient(' + color1 + ', ' + color2 + ')';
+        var str1 = '-webkit-linear-gradient(' + color1 + ', ' + color2 + ') fixed';
+        var str2 = '-o-linear-gradient(' + color1 + ', ' + color2 + ') fixed';
+        var str3 = '-moz-linear-gradient(' + color1 + ', ' + color2 + ') fixed';
+        var str4 = 'linear-gradient(' + color1 + ', ' + color2 + ') fixed';
 
         console.log(str1);
         $('html').css({
