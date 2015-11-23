@@ -40,6 +40,93 @@
 			    <!--<div class="modal-footer"></div> -->
 			  </div>
 	     </div>
+
+	     <div class="container pre-content" align="center" style="display: none;">
+	     	<h2 class='flow-text'>Choose:</h2><br>
+	     	<form class="col s12">
+				<div class="row">
+					<div class="input-field col s6">
+						<input id="num_participants" type="number" style="color: white; font-size: 20px">
+						<label for="num_participants">Number of participants (3 - &infin;)</label>
+					</div>
+					<div class="input-field col s6">
+						<input id="num_layers" type="number" min="1" max="10" style="color: white; font-size: 20px">
+						<label for="num_layers">Number of layers (1 - 10)</label>
+					</div>
+				</div>
+			</form>
+			<br><br>
+			<a class="waves-effect waves-light btn-large red lighten-1" id="cont-btn">Continue</a>
+	     </div>
+
+	     <div class="container pre-ask-content" align="center" style="display: none;">
+				<h2 class='flow-text'><span class="greeting">Hello, Participant 1.</span></h2><br>
+	     </div>
+
+		 <div class="container ask-content" align="center" style="display: none;">
+			<h2 class='flow-text'>Enter:</h2><br>
+			<form class="col s12">
+				<div class="row">
+					<div class="input-field col s12 q1">
+			        	<input id="question1" type="text" style="color: white; font-size: 20px">
+			        	<label for="question1">Layer 1</label>
+			        </div>
+			        <div class="input-field col s12 q2">
+			        	<input id="question2" type="text" style="color: white; font-size: 20px">
+			        	<label for="question2">Layer 2</label>
+			        </div>
+			        <div class="input-field col s12 q3">
+			        	<input id="question3" type="text" style="color: white; font-size: 20px">
+			        	<label for="question3">Layer 3</label>
+			        </div>
+			        <div class="input-field col s12 q4">
+			        	<input id="question4" type="text" style="color: white; font-size: 20px">
+			        	<label for="question4">Layer 4</label>
+			        </div>
+			        <div class="input-field col s12 q5">
+			        	<input id="question5" type="text" style="color: white; font-size: 20px">
+			        	<label for="question5">Layer 5</label>
+			        </div>
+			        <div class="input-field col s12 q6">
+			        	<input id="question6" type="text" style="color: white; font-size: 20px">
+			        	<label for="question6">Layer 6</label>
+			        </div>
+			        <div class="input-field col s12 q7">
+			        	<input id="question7" type="text" style="color: white; font-size: 20px">
+			        	<label for="question7">Layer 7</label>
+			        </div>
+			        <div class="input-field col s12 q8">
+			        	<input id="question8" type="text" style="color: white; font-size: 20px">
+			        	<label for="question8">Layer 8</label>
+			        </div>
+			        <div class="input-field col s12 q9">
+			        	<input id="question9" type="text" style="color: white; font-size: 20px">
+			        	<label for="question9">Layer 9</label>
+			        </div>
+			        <div class="input-field col s12 q10">
+			        	<input id="question10" type="text" style="color: white; font-size: 20px">
+			        	<label for="question10">Layer 10</label>
+			        </div>
+				</div>
+			</form>
+			<br><br>
+			<a class="waves-effect waves-light btn-large purple lighten-1" id="next-btn">Next</a>
+		 </div>
+
+		 <div class="container pre-game-content" align="center" style="display: none;">
+			<h2 class='flow-text'><span class="preface">Layer 1.</span></h2><br>
+		 </div>
+
+		 <div class="container game-content" align="center" style="display: none;">
+			<h2 class='flow-text'><span class="question"></span></h2><br>
+			<a class="waves-effect waves-light btn-large light-blue darken-2" id="done-btn">Done</a>
+		 </div>
+
+		 <div class="cotainer end-content" align="center" style="display: none;">
+			<h2 class='flow-text'>How'd it go?</h2><br>
+			<p class="flow-text comment" style="font-size: 16px">Did you learn something new about each other? Surprising? Intriguing?<br><br>Whatever it may be, I hope that this game has been both entertaining and eye-opening. People are complex, and we should always remember to dive past the surface and really get to know them. In this way, we can form a genuine community to support and understand each other.<br><br>Thank you for participating in the onion game. And if you're feeling up for it, refresh to play again.</p>
+		 </div>
+
 	</body>
 
 	<footer>

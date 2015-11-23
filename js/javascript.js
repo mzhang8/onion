@@ -10,88 +10,191 @@ $(document).ready(function(){
     	out_duration: 200, // Transition out duration
     	ready: function() { },
     	complete: function() {
-            askForNumParticipants(); } // Callback for Modal close
+            askForSettings(); } // Callback for Modal close
     	}
   	);
 
-	function askForNumParticipants() {
+    var numParticipants;
+    var numLayers;
+
+	function askForSettings() {
         // Set up new page
-        setColors("#b71c1c", "#e57373");
-        $('.main-content').fadeOut("normal", function() {
-            $(this).empty();
+        $('.main-content').fadeOut("slow", function() {
+            setColors("#b71c1c", "#e57373");
+            $('#cont-btn').hide();
+            $('.pre-content').fadeIn("slow");
+        });
 
-            //$(this).attr('align', 'left'); 
+        $('#num_participants, #num_layers').change(function() {
+            numParticipants = $('#num_participants').val();
+            numLayers = $('#num_layers').val();
 
-            d = document.createElement('div');
-            $(d).addClass('input-field col s6');
-            $(d).append('<input id="num_participants" type="number" style="color: white; font-size: 20px">');
-            $(d).append('<label for="num_participants">Number of participants (1 - &infin;)</label>');
+            console.log(numParticipants);
+            console.log(numParticipants % 1);
 
-            d2 = document.createElement('div');
-            $(d2).addClass('input-field col s6');
-            $(d2).append('<input id="num_layers" type="number" min="1" max="10" style="color: white; font-size: 20px">');
-            $(d2).append('<label for="num_layers">Number of layers (1 - 10)</label>');
+            if (numParticipants > 2 && numLayers >= 1 && numLayers <= 10) {
+                if ((numParticipants % 1 == 0) && (numLayers % 1 == 0)) {
+                    $('#cont-btn').show("slow");
+                } else {
+                    $('#cont-btn').fadeOut(100);
+                }
+            } else {
+                $('#cont-btn').fadeOut(100);
+            }
+        });
 
-            forms = document.createElement('form');
-            $(forms).addClass('col s12');
+        $('#cont-btn').click(function() {
+            gatherQuestions();
+        });
+	}
 
-            row = document.createElement('div');
-            $(row).addClass('row');
+    var questions = [];
+    var participant = 1;
+    function gatherQuestions() {
+        $('.pre-content').fadeOut("slow", function() {
+            setColors("#9c27b0", "#ce93d8");
+            for (i = parseInt(numLayers) + 1; i <= 10; i++) {
+                str = ".q" + i.toString();
+                $(str).hide();
+            }
 
-            $(row).append(d);
-            $(row).append(d2);
-            $(forms).append(row);
+            for (j = 0; j < parseInt(numLayers); j++) {
+                questions.push([]);
+            }
 
-
-            $(this).append("<h2 class='flow-text'>Choose:</h2><br>");
-            $(this).append(forms);
-            $(this).append("<br><br>");
-            $(this).fadeIn("slow", function() {
-                $('.main-content').append('<a class="waves-effect waves-light btn-large red lighten-1" id="cont-btn">Continue</a>');
-                $('#cont-btn').hide();
-
-                $('#num_participants').change(function() {
-                    var numParticipants = $('#num_participants').val();
-                    var numLayers = $('#num_layers').val();
-                    if (numParticipants >= 1 && numLayers >= 1 && numLayers <= 10) {
-                        $('#cont-btn').show("slow");
-                    } else {
-                        $('#cont-btn').fadeOut(100);
-                    }
+            $('.pre-ask-content').fadeIn(2000);
+            $('.greeting').mouseover(function() {
+                $('.pre-ask-content').fadeOut(500, function() {
+                    $('.ask-content').show("slow");
                 });
-
-                $('#num_layers').change(function() {
-                    var numParticipants = $('#num_participants').val();
-                    var numLayers = $('#num_layers').val();
-                    if (numParticipants >= 1 && numLayers >= 1 && numLayers <= 10) {
-                        $('#cont-btn').show("slow");
-                    } else {
-                        $('#cont-btn').fadeOut(100);
-                    }
-                });
-
             });
         });
 
+        $('#next-btn').click(function() {
+            var empty = false;
 
-        // Name and participants 
+            // Check that no layers are empty
+            for (k = 1; k <= parseInt(numLayers); k++) {
+                str = "#question" + k.toString();
+                if ($(str).val() == 0) {
+                    empty = true;
+                    break;
+                }
+            }
 
-	}
+            // Ask each player to input and store questions
+            if (empty == false) {
+                for (m = 1; m <= parseInt(numLayers); m++) {
+                    str = "#question" + m.toString();
+                    question = $(str).val();
+                    questions[m - 1].push(question);
+                }
 
-    function askForLayers() {
+                participant++;
 
-    }
+                // Questions all entered
+                if (participant > numParticipants) {
+                    answerQuestions();
+                } else {    // Reset fields
+                    $('.ask-content').hide();
 
-    function gatherQuestions() {
+                    $('.greeting').text("Hello, Participant " + participant.toString() + ".");
+                    $('.pre-ask-content').fadeIn(2000);
+                    $('.greeting').mouseover(function() {
+                        $('.pre-ask-content').fadeOut(500, function() {
+                            for (n = 1; n <= parseInt(numLayers); n++) {
+                                str = "#question" + n.toString();
+                                $(str).val("");
+                            }
 
+                            $('.ask-content').show("slow");
+                        });
+                    });
+                }
+
+            }
+
+        });
     }
 
     function answerQuestions() {
+        $('.ask-content').fadeOut("slow", function() {
+            setColors("#01579b", "#81d4fa");
 
+            currLayer = 1, currQuestion = 0;
+            currQuestions = [];
+
+            $('.preface').text("Layer " + currLayer.toString() + ".");
+            $('.pre-game-content').fadeIn(2000, function() {
+                currQuestions = shuffleArray(questions[currLayer - 1]);
+
+                $('.pre-game-content').fadeOut(500, function() {
+                    $('.question').text(currQuestions[currQuestion]);
+                    $('.game-content').fadeIn("slow");
+
+                });
+            });
+
+
+            $('#done-btn').click(function() {
+                $('.game-content').fadeOut("slow", function() {
+                    currQuestion++;
+
+                    if (currQuestion == parseInt(numParticipants)) {
+                        currLayer++;
+                        currQuestion = 0;
+                    }
+
+                    if (currLayer > parseInt(numLayers)) {
+                        endGame();
+                    } else {
+                        if (currQuestion == 0) {
+                            $('.preface').text("Layer " + currLayer.toString() + ".");
+                            $('.pre-game-content').fadeIn(2000, function() {
+                                currQuestions = shuffleArray(questions[currLayer - 1]);
+
+                                $('.pre-game-content').fadeOut(500, function() {
+                                    $('.question').text(currQuestions[currQuestion]);
+                                    $('.game-content').fadeIn("slow");
+
+                                });
+                            }); 
+                        } else {
+                            $('.question').text(currQuestions[currQuestion]);
+                            $('.game-content').fadeIn("slow");
+                        }
+                    }
+                });             
+
+
+
+            });
+
+        });
     }
 
     function endGame() {
+        $('.game-content').fadeOut("slow", function() {
+            setColors("#4caf50", "#c8e6c9");
 
+            $('.end-content').fadeIn(2000);
+
+        });
+    }
+
+    /**
+     * Randomize array element order in-place.
+     * Using Durstenfeld shuffle algorithm.
+     */
+    function shuffleArray(array) {
+        for (var i = array.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+
+        return array;
     }
 
     function setColors(color1, color2) {
@@ -108,5 +211,4 @@ $(document).ready(function(){
             background: str4
         }); 
     }
-
 });
